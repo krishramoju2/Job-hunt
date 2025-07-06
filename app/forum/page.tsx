@@ -19,7 +19,7 @@ export default function Forum() {
     fetch('/api/jobs').then((res) => res.json()).then(setJobs);
   }, []);
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     await fetch('/api/forum', {
       method: 'POST',
@@ -34,12 +34,14 @@ export default function Forum() {
 
   return (
     <div className="p-10 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6">Community Forum</h1>
-      <form onSubmit={handleSubmit} className="mb-4 space-y-4">
+      <h1 className="text-4xl font-bold mb-8 text-center text-blue-800">UpSkillFam Community Forum</h1>
+
+      {/* Form */}
+      <form onSubmit={handleSubmit} className="mb-8 max-w-2xl mx-auto space-y-4">
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
-          className="w-full p-3 border rounded"
+          className="w-full p-3 border rounded shadow-sm"
           placeholder="Share your thoughts on becoming a great SDE..."
         />
         <div>
@@ -56,37 +58,51 @@ export default function Forum() {
             ))}
           </select>
         </div>
-        <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">
+        <button
+          type="submit"
+          className="px-6 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-700 transition"
+        >
           Post
         </button>
       </form>
 
-      <h2 className="text-xl font-bold mt-6 mb-2">Posts</h2>
-      {thoughts.map((t, i) => (
-        <div
-          key={i}
-          className={`bg-white p-4 my-2 rounded shadow`}
-          style={{ fontFamily: `var(${t.font})` }}
-        >
-          {t.text}
-        </div>
-      ))}
-
-      <h2 className="text-xl font-bold mt-6 mb-2">Live Jobs</h2>
-      {jobs.map((job, i) => (
-        <div key={i} className="bg-green-100 p-3 my-2 rounded">
-          <p className="font-semibold">{job.title}</p>
-          <p className="text-sm">{job.company}</p>
-          <a
-            href={job.link}
-            target="_blank"
-            className="text-blue-700 underline"
-            rel="noopener noreferrer"
+      {/* Forum Posts */}
+      <div className="max-w-2xl mx-auto">
+        <h2 className="text-2xl font-bold mt-6 mb-4 text-gray-800">Shared Thoughts</h2>
+        {thoughts.map((t, i) => (
+          <div
+            key={i}
+            className="bg-white p-4 my-3 rounded-xl shadow-md border border-gray-200"
+            style={{ fontFamily: `var(${t.font})` }}
           >
-            View
-          </a>
+            {t.text}
+          </div>
+        ))}
+      </div>
+
+      {/* Job Bubbles */}
+      <div className="mt-12">
+        <h2 className="text-2xl font-bold mb-4 text-gray-800">Live Job Opportunities</h2>
+        <div className="flex flex-wrap gap-4">
+          {jobs.map((job, i) => (
+            <div
+              key={i}
+              className="p-4 bg-gradient-to-br from-green-100 to-blue-100 rounded-full shadow-md hover:scale-105 transition w-fit max-w-sm"
+            >
+              <p className="text-lg font-semibold text-gray-800">{job.title}</p>
+              <p className="text-sm text-gray-600 mb-1">{job.company}</p>
+              <a
+                href={job.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-800 text-sm underline"
+              >
+                View Job
+              </a>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 }
