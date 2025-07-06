@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Optional: smooth font rendering */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom font variables from next/font/google */
+:root {
+  --font-inter: 'Inter', sans-serif;
+  --font-dancing: 'Dancing Script', cursive;
+  --font-lobster: 'Lobster', cursive;
+  --font-pacifico: 'Pacifico', cursive;
+}
+
+/* Optional: class shortcuts */
+.font-dancing {
+  font-family: var(--font-dancing);
+}
+.font-lobster {
+  font-family: var(--font-lobster);
+}
+.font-pacifico {
+  font-family: var(--font-pacifico);
+}
