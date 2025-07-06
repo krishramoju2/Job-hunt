@@ -2,7 +2,14 @@
 export default {
   content: ['./app/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        inter: 'var(--font-inter)',
+        dancing: 'var(--font-dancing)',
+        lobster: 'var(--font-lobster)',
+        pacifico: 'var(--font-pacifico)',
+      },
+    },
   },
   plugins: [],
 };
