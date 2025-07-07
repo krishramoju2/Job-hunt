@@ -66,6 +66,25 @@ useEffect(() => {
   }
 
   return (
+    {/* HR Contacts */}
+<div className="mt-12 max-w-4xl mx-auto">
+  <h2 className="text-2xl font-bold mb-4 text-gray-800">SDE HR Contact Details</h2>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {contacts.map((c, i) => (
+      <div key={i} className="bg-white p-4 rounded-xl shadow border">
+        <p className="text-lg font-semibold text-gray-900">{c.name}</p>
+        <p className="text-sm text-gray-700">{c.title}</p>
+        <p className="text-sm text-gray-600">{c.company}</p>
+        {c.email && (
+          <a href={`mailto:${c.email}`} className="text-blue-700 text-sm underline">
+            {c.email}
+          </a>
+        )}
+      </div>
+    ))}
+  </div>
+</div>
+
     <div className="p-10 bg-gray-50 min-h-screen">
       <h1 className="text-4xl font-bold mb-8 text-center text-blue-800">UpSkillFam Community Forum</h1>
 
