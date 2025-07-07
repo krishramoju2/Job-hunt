@@ -8,6 +8,7 @@ const pacifico = Pacifico({ subsets: ['latin'], weight: '400', variable: '--font
 
 export const metadata = {
   title: 'UpSkillFam',
+  description: 'Upskill yourself with internships, resume builders, hackathon updates, and postgrad profile support!',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           scroll-smooth
         `}
       >
+        {/* Optional: Navbar (future upgrade?) */}
         {children}
       </body>
     </html>
