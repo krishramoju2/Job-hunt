@@ -10,11 +10,20 @@ export const metadata = {
   title: 'UpSkillFam',
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${dancing.variable} ${lobster.variable} ${pacifico.variable} font-sans`}
+        className={`
+          ${inter.variable} 
+          ${dancing.variable} 
+          ${lobster.variable} 
+          ${pacifico.variable} 
+          font-sans 
+          bg-weird-gradient 
+          text-gray-900 
+          scroll-smooth
+        `}
       >
         {children}
       </body>
