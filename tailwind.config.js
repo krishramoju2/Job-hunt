@@ -8,11 +8,15 @@ export default {
         dancing: 'var(--font-dancing)',
         lobster: 'var(--font-lobster)',
         pacifico: 'var(--font-pacifico)',
+        resume: ['Inter', 'sans-serif'], // Preferred clean font for resumes
       },
       colors: {
         blobBlue: '#BDE0FE',
         blobPurple: '#CDB4DB',
         blobPink: '#FFC8DD',
+        resumeGray: '#f9f9f9',
+        resumeBorder: '#d1d5db',
+        resumeText: '#1f2937',
       },
       keyframes: {
         float: {
@@ -20,8 +24,12 @@ export default {
           '50%': { transform: 'translateY(-20px)' },
         },
         blob: {
-          '0%, 100%': { borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' },
-          '50%': { borderRadius: '30% 60% 70% 40% / 50% 60% 30% 60%' },
+          '0%, 100%': {
+            borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%',
+          },
+          '50%': {
+            borderRadius: '30% 60% 70% 40% / 50% 60% 30% 60%',
+          },
         },
       },
       animation: {
@@ -30,5 +38,7 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'), // For resume PDF formatting
+  ],
 };
