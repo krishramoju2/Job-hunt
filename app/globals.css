@@ -2,13 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Optional: smooth font rendering */
+/* Font rendering */
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom font variables from next/font/google */
+/* Custom font variables */
 :root {
   --font-inter: 'Inter', sans-serif;
   --font-dancing: 'Dancing Script', cursive;
@@ -16,7 +16,7 @@ html {
   --font-pacifico: 'Pacifico', cursive;
 }
 
-/* Optional: class shortcuts */
+/* Font classes */
 .font-dancing {
   font-family: var(--font-dancing);
 }
@@ -25,4 +25,48 @@ html {
 }
 .font-pacifico {
   font-family: var(--font-pacifico);
+}
+
+/* Weird Cool Backgrounds */
+.bg-weird-gradient {
+  background: radial-gradient(circle at top left, #ff00cc, #3333ff);
+}
+.bg-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Shadow effects */
+.shadow-magic {
+  box-shadow: 0 0 10px 4px rgba(0, 255, 255, 0.4),
+              0 0 20px 10px rgba(255, 0, 255, 0.2);
+}
+
+/* Hover bubble */
+.hover-bubble {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-bubble:hover {
+  transform: scale(1.08) rotate(1deg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Wiggly animation */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+.animate-wiggle {
+  animation: wiggle 1s infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }
