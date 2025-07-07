@@ -22,6 +22,13 @@ export default function Forum() {
   const [jobKeyword, setJobKeyword] = useState('');
   const [jobCompany, setJobCompany] = useState('');
 const [contacts, setContacts] = useState([]);
+const [hackathons, setHackathons] = useState([]);
+
+useEffect(() => {
+  fetch('/api/hackathons')
+    .then((res) => res.json())
+    .then(setHackathons);
+}, []);
 
 useEffect(() => {
   fetch('/api/hrcontacts')
