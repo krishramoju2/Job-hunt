@@ -22,6 +22,14 @@ export default function Forum() {
   const [blogKeyword, setBlogKeyword] = useState('');
   const [jobKeyword, setJobKeyword] = useState('');
   const [jobCompany, setJobCompany] = useState('');
+  const [quotes, setQuotes] = useState([]);
+
+useEffect(() => {
+  fetch('/api/quotes')
+    .then((res) => res.json())
+    .then(setQuotes);
+}, []);
+
 
   useEffect(() => {
     fetch('/api/hackathons').then(res => res.json()).then(setHackathons);
@@ -63,6 +71,21 @@ export default function Forum() {
   }
 
   return (
+    <div className="mt-12 max-w-4xl mx-auto">
+  <h2 className="text-2xl font-bold mb-4 text-gray-800">💡 Inspirational Sayings from Tech Leaders</h2>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {quotes.map((q, i) => (
+      <div
+        key={i}
+        className="bg-glass p-6 rounded-2xl shadow-magic backdrop-blur-lg border border-white/20 animate-float hover-bubble"
+      >
+        <p className="text-lg italic font-pacifico text-gray-900">“{q.quote}”</p>
+        <p className="mt-2 text-right font-semibold text-sm text-gray-700">— {q.author}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
     <div className="p-10 bg-gray-50 min-h-screen relative overflow-hidden">
       <div className="absolute -z-10 top-0 left-0 w-full h-full overflow-hidden">
         <div className="blob bg-pink-400 w-96 h-96 top-10 left-10"></div>
