@@ -87,7 +87,22 @@ html {
   @apply border-t border-gray-300 my-4;
 }
 
-/* Print-specific resume styles */
+/* Postgrad-specific styles */
+.postgrad-section {
+  @apply p-6 bg-gradient-to-br from-white to-purple-50 shadow-md rounded-xl mb-6;
+  font-family: var(--font-inter);
+}
+.postgrad-header {
+  @apply text-2xl font-semibold mb-3 text-purple-900;
+}
+.postgrad-subtitle {
+  @apply text-sm text-purple-700 mb-1;
+}
+.postgrad-field {
+  @apply mb-4;
+}
+
+/* Print-specific adjustments */
 @media print {
   body {
     background: white;
@@ -105,7 +120,8 @@ html {
     all: unset;
   }
 
-  .resume-section {
+  .resume-section,
+  .postgrad-section {
     @apply p-0 shadow-none border-none;
   }
 
