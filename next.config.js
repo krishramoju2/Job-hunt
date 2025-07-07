@@ -1,8 +1,6 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    serverActions: true,
-  },
+  output: 'export',
+  basePath: '/Job-hunt',
+  trailingSlash: true,
 };
-
 export default nextConfig;
