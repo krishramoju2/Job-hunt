@@ -21,7 +21,13 @@ export default function Forum() {
   const [blogKeyword, setBlogKeyword] = useState('');
   const [jobKeyword, setJobKeyword] = useState('');
   const [jobCompany, setJobCompany] = useState('');
+const [contacts, setContacts] = useState([]);
 
+useEffect(() => {
+  fetch('/api/hrcontacts')
+    .then((res) => res.json())
+    .then(setContacts);
+}, []);
   // Load data with filters
   useEffect(() => {
     const queryForum = new URLSearchParams();
