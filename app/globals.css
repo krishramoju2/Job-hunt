@@ -70,3 +70,46 @@ html {
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
+
+/* Resume-specific styles */
+.resume-section {
+  @apply p-6 bg-white shadow-md rounded-lg mb-6;
+  font-family: var(--font-inter);
+  color: #1f2937;
+}
+.resume-header {
+  @apply text-3xl font-bold mb-2 text-gray-800;
+}
+.resume-item {
+  @apply mb-4;
+}
+.resume-divider {
+  @apply border-t border-gray-300 my-4;
+}
+
+/* Print-specific resume styles */
+@media print {
+  body {
+    background: white;
+    color: black;
+    font-family: var(--font-inter);
+    box-shadow: none !important;
+  }
+
+  .bg-weird-gradient,
+  .bg-glass,
+  .shadow-magic,
+  .hover-bubble,
+  .animate-wiggle,
+  .animate-float {
+    all: unset;
+  }
+
+  .resume-section {
+    @apply p-0 shadow-none border-none;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
