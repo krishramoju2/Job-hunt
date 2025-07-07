@@ -73,6 +73,28 @@ useEffect(() => {
   }
 
   return (
+    {/* Upcoming Hackathons */}
+<div className="mt-12 max-w-4xl mx-auto">
+  <h2 className="text-2xl font-bold mb-4 text-gray-800">🚀 Upcoming Hackathons</h2>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {hackathons.map((h, i) => (
+      <div key={i} className="bg-yellow-50 p-4 rounded-xl shadow border border-yellow-200">
+        <p className="text-lg font-semibold text-gray-900">{h.name}</p>
+        <p className="text-sm text-gray-600 mb-1">{h.date}</p>
+        <p className="text-sm text-gray-500">{h.location}</p>
+        <a
+          href={h.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-700 text-sm underline"
+        >
+          View Event
+        </a>
+      </div>
+    ))}
+  </div>
+</div>
+
     {/* HR Contacts */}
 <div className="mt-12 max-w-4xl mx-auto">
   <h2 className="text-2xl font-bold mb-4 text-gray-800">SDE HR Contact Details</h2>
