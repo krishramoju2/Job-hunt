@@ -8,7 +8,8 @@ export default {
         dancing: 'var(--font-dancing)',
         lobster: 'var(--font-lobster)',
         pacifico: 'var(--font-pacifico)',
-        resume: ['Inter', 'sans-serif'], // Preferred clean font for resumes
+        resume: ['Inter', 'sans-serif'], // Clean font for resumes
+        postgrad: ['Inter', 'sans-serif'], // Also suitable for postgrad builder
       },
       colors: {
         blobBlue: '#BDE0FE',
@@ -17,6 +18,10 @@ export default {
         resumeGray: '#f9f9f9',
         resumeBorder: '#d1d5db',
         resumeText: '#1f2937',
+        postgradBg: '#f5f3ff',        // light purple background
+        postgradAccent: '#7c3aed',   // violet-600
+        postgradBorder: '#ddd6fe',   // violet-200
+        postgradText: '#4c1d95',     // violet-900
       },
       keyframes: {
         float: {
@@ -39,6 +44,6 @@ export default {
     },
   },
   plugins: [
-    require('@tailwindcss/typography'), // For resume PDF formatting
+    require('@tailwindcss/typography'), // For resume and postgrad printable formatting
   ],
 };
