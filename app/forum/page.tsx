@@ -122,6 +122,37 @@ export default function Forum() {
             </div>
           ))}
         </div>
+        {/* Feedback Form */}
+<div className="mt-12 max-w-xl mx-auto bg-white p-6 rounded-xl shadow">
+  <h2 className="text-2xl font-bold mb-4 text-gray-800">Give Us Feedback</h2>
+  <form
+    onSubmit={async (e) => {
+      e.preventDefault();
+      const form = e.target as HTMLFormElement;
+      const feedback = (form.elements.namedItem('feedback') as HTMLTextAreaElement).value;
+      await fetch('/api/feedback', {
+        method: 'POST',
+        body: JSON.stringify({ feedback }),
+      });
+      form.reset();
+      alert('Thank you for your feedback!');
+    }}
+  >
+    <textarea
+      name="feedback"
+      required
+      className="w-full p-3 border rounded mb-3"
+      placeholder="Your thoughts, ideas, or issues..."
+    />
+    <button
+      type="submit"
+      className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
+    >
+      Submit Feedback
+    </button>
+  </form>
+</div>
+
       </div>
     </div>
   );
