@@ -13,10 +13,12 @@ export default function Forum() {
   const [font, setFont] = useState('--font-dancing');
   const [thoughts, setThoughts] = useState([]);
   const [jobs, setJobs] = useState([]);
+  const [interns, setInterns] = useState(0);
 
   useEffect(() => {
     fetch('/api/forum').then((res) => res.json()).then(setThoughts);
     fetch('/api/jobs').then((res) => res.json()).then(setJobs);
+    fetch('/api/interns').then((res) => res.json()).then((data) => setInterns(data.count));
   }, []);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -32,9 +34,27 @@ export default function Forum() {
     setFont('--font-dancing');
   }
 
+  async function handleGotInterned() {
+    await fetch('/api/interns', { method: 'POST' });
+    const res = await fetch('/api/interns');
+    const data = await res.json();
+    setInterns(data.count);
+  }
+
   return (
     <div className="p-10 bg-gray-50 min-h-screen">
       <h1 className="text-4xl font-bold mb-8 text-center text-blue-800">UpSkillFam Community Forum</h1>
+
+      {/* Intern Counter */}
+      <div className="mb-8 text-center">
+        <p className="text-lg text-gray-700">🎉 <span className="font-bold">{interns}</span> people got internships through UpSkillFam!</p>
+        <button
+          onClick={handleGotInterned}
+          className="mt-2 px-5 py-2 bg-green-600 text-white rounded-full hover:bg-green-700 transition"
+        >
+          I Got Interned!
+        </button>
+      </div>
 
       {/* Form */}
       <form onSubmit={handleSubmit} className="mb-8 max-w-2xl mx-auto space-y-4">
