@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 
 const fontOptions = [
+  { label: 'All Fonts', value: '' },
   { label: 'Dancing Script', value: '--font-dancing' },
   { label: 'Lobster', value: '--font-lobster' },
   { label: 'Pacifico', value: '--font-pacifico' },
@@ -15,11 +16,28 @@ export default function Forum() {
   const [jobs, setJobs] = useState([]);
   const [interns, setInterns] = useState(0);
 
+  // Filters
+  const [blogFontFilter, setBlogFontFilter] = useState('');
+  const [blogKeyword, setBlogKeyword] = useState('');
+  const [jobKeyword, setJobKeyword] = useState('');
+  const [jobCompany, setJobCompany] = useState('');
+
+  // Load data with filters
   useEffect(() => {
-    fetch('/api/forum').then((res) => res.json()).then(setThoughts);
-    fetch('/api/jobs').then((res) => res.json()).then(setJobs);
+    const queryForum = new URLSearchParams();
+    if (blogFontFilter) queryForum.set('font', blogFontFilter);
+    if (blogKeyword) queryForum.set('keyword', blogKeyword);
+
+    fetch(`/api/forum?${queryForum}`).then((res) => res.json()).then(setThoughts);
+
+    const queryJobs = new URLSearchParams();
+    if (jobKeyword) queryJobs.set('keyword', jobKeyword);
+    if (jobCompany) queryJobs.set('company', jobCompany);
+
+    fetch(`/api/jobs?${queryJobs}`).then((res) => res.json()).then(setJobs);
+
     fetch('/api/interns').then((res) => res.json()).then((data) => setInterns(data.count));
-  }, []);
+  }, [blogFontFilter, blogKeyword, jobKeyword, jobCompany]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -27,11 +45,11 @@ export default function Forum() {
       method: 'POST',
       body: JSON.stringify({ text, font }),
     });
-    const res = await fetch('/api/forum');
-    const data = await res.json();
-    setThoughts(data);
     setText('');
     setFont('--font-dancing');
+    // Trigger refresh
+    setBlogFontFilter('');
+    setBlogKeyword('');
   }
 
   async function handleGotInterned() {
@@ -47,7 +65,9 @@ export default function Forum() {
 
       {/* Intern Counter */}
       <div className="mb-8 text-center">
-        <p className="text-lg text-gray-700">🎉 <span className="font-bold">{interns}</span> people got internships through UpSkillFam!</p>
+        <p className="text-lg text-gray-700">
+          🎉 <span className="font-bold">{interns}</span> people got internships through UpSkillFam!
+        </p>
         <button
           onClick={handleGotInterned}
           className="mt-2 px-5 py-2 bg-green-600 text-white rounded-full hover:bg-green-700 transition"
@@ -56,7 +76,7 @@ export default function Forum() {
         </button>
       </div>
 
-      {/* Blog Form */}
+      {/* Blog Post Form */}
       <form onSubmit={handleSubmit} className="mb-8 max-w-2xl mx-auto space-y-4">
         <textarea
           value={text}
@@ -71,7 +91,7 @@ export default function Forum() {
             value={font}
             onChange={(e) => setFont(e.target.value)}
           >
-            {fontOptions.map((f) => (
+            {fontOptions.slice(1).map((f) => (
               <option key={f.value} value={f.value}>
                 {f.label}
               </option>
@@ -86,9 +106,32 @@ export default function Forum() {
         </button>
       </form>
 
+      {/* Blog Filters */}
+      <div className="max-w-2xl mx-auto mb-6 space-y-2">
+        <h2 className="text-xl font-bold">Filter Blog Posts</h2>
+        <select
+          className="w-full p-2 border rounded"
+          value={blogFontFilter}
+          onChange={(e) => setBlogFontFilter(e.target.value)}
+        >
+          {fontOptions.map((f) => (
+            <option key={f.value} value={f.value}>
+              {f.label}
+            </option>
+          ))}
+        </select>
+        <input
+          type="text"
+          className="w-full p-2 border rounded"
+          placeholder="Search keyword in posts..."
+          value={blogKeyword}
+          onChange={(e) => setBlogKeyword(e.target.value)}
+        />
+      </div>
+
       {/* Forum Posts */}
       <div className="max-w-2xl mx-auto">
-        <h2 className="text-2xl font-bold mt-6 mb-4 text-gray-800">Shared Thoughts</h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-800">Shared Thoughts</h2>
         {thoughts.map((t, i) => (
           <div
             key={i}
@@ -100,8 +143,27 @@ export default function Forum() {
         ))}
       </div>
 
+      {/* Job Filters */}
+      <div className="mt-12 max-w-2xl mx-auto space-y-2">
+        <h2 className="text-xl font-bold">Filter Jobs</h2>
+        <input
+          type="text"
+          className="w-full p-2 border rounded"
+          placeholder="Keyword (e.g., SDE, intern)..."
+          value={jobKeyword}
+          onChange={(e) => setJobKeyword(e.target.value)}
+        />
+        <input
+          type="text"
+          className="w-full p-2 border rounded"
+          placeholder="Company (e.g., Google)..."
+          value={jobCompany}
+          onChange={(e) => setJobCompany(e.target.value)}
+        />
+      </div>
+
       {/* Job Bubbles */}
-      <div className="mt-12">
+      <div className="mt-8">
         <h2 className="text-2xl font-bold mb-4 text-gray-800">Live Job Opportunities</h2>
         <div className="flex flex-wrap gap-4">
           {jobs.map((job, i) => (
