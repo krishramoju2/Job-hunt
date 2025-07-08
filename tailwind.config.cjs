@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: ['./app/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
@@ -8,8 +8,8 @@ export default {
         dancing: 'var(--font-dancing)',
         lobster: 'var(--font-lobster)',
         pacifico: 'var(--font-pacifico)',
-        resume: ['Inter', 'sans-serif'], // Clean font for resumes
-        postgrad: ['Inter', 'sans-serif'], // Also suitable for postgrad builder
+        resume: ['Inter', 'sans-serif'],
+        postgrad: ['Inter', 'sans-serif'],
       },
       colors: {
         blobBlue: '#BDE0FE',
@@ -18,10 +18,10 @@ export default {
         resumeGray: '#f9f9f9',
         resumeBorder: '#d1d5db',
         resumeText: '#1f2937',
-        postgradBg: '#f5f3ff',        // light purple background
-        postgradAccent: '#7c3aed',   // violet-600
-        postgradBorder: '#ddd6fe',   // violet-200
-        postgradText: '#4c1d95',     // violet-900
+        postgradBg: '#f5f3ff',
+        postgradAccent: '#7c3aed',
+        postgradBorder: '#ddd6fe',
+        postgradText: '#4c1d95',
       },
       keyframes: {
         float: {
@@ -44,6 +44,6 @@ export default {
     },
   },
   plugins: [
-    require('@tailwindcss/typography'), // For resume and postgrad printable formatting
+    require('@tailwindcss/typography'),
   ],
 };
